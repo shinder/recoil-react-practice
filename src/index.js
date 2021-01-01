@@ -1,17 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDom from 'react-dom'
+import {BrowserRouter, Route} from 'react-router-dom'
+import {RecoilRoot} from 'recoil'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import './styles/todo-list.css'
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+import Main from './components/Main'
+import AddForm from './components/AddForm'
+import EditForm from './components/EditForm'
+
+ReactDom.render(
+    <BrowserRouter>
+      <RecoilRoot>
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <Route path="/" exact render={()=>{
+            console.log('--- before Main')
+            return <Main />
+          }} />
+          <Route path="/add" component={AddForm} />
+          <Route path="/edit/:id" render={({match})=>{
+            return <EditForm dataId={match.params.id} />
+          }} />
+        </React.Suspense>
+      </RecoilRoot>
+    </BrowserRouter>, document.querySelector('#root'))
+
+

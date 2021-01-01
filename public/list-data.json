@@ -1,0 +1,5 @@
+[
+  { "id": 1, "name": "洗衣服4", "finished": false },
+  { "id": 2, "name": "擦地板5", "finished": false },
+  { "id": 3, "name": "泡咖啡6", "finished": true }
+]
